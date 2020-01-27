@@ -1,0 +1,13 @@
+{
+    "name": "phptheme/link",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "PhpTheme\\Link\\" : ""
+        }
+    },
+    "require": {
+        "phptheme/tag": "*",
+        "phptheme/html-helper": "*"
+    }
+}
