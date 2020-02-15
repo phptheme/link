@@ -17,7 +17,7 @@ class PostLink extends Link
 
     public $formAttributes = [];
 
-    public $defaultFormAttributes = ['method' => 'POST']
+    public $defaultFormAttributes = ['method' => 'POST'];
 
     public function toString() : string
     {
