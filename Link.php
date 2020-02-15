@@ -17,28 +17,57 @@ class Link extends \PhpTheme\Tag\Tag
 
     public $icon;
 
+    public $template = '{label}';
+
     public $iconTemplate = '<i class="{icon}"></i>{label}';
+
+    protected function getLabel()
+    {
+        return $this->label;
+    }
+
+    protected function getUrl()
+    {
+        return $this->url;
+    }
+
+    protected function getIcon()
+    {
+        return $this->icon;
+    }
+
+    protected function renderIconTemplate(array $params = []) : string
+    {
+        return strtr($this->iconTemplate, $params);
+    }
+
+    protected function renderTemplate(array $params = []) : string
+    {
+        return strtr($this->template, $params);
+    }
 
     public function getContent()
     {
-        $return = $this->label;
+        $icon = $this->getIcon();
 
-        if ($this->icon)
+        if ($icon)
         {
-            $return = strtr($this->iconTemplate, [
-                '{label}' => $this->label,
-                '{icon}' => $this->icon
+            return $this->renderIconTemplate([
+                '{label}' => $this->getLabel(),
+                '{icon}' => $icon
             ]);
         }
 
-        return $return;
+        return $this->renderTemplate([
+            '{label}' => $this->getLabel()
+        ]);
     }
 
     public function toString() : string
     {
         if (($this->url) && ($this->tag == 'a'))
         {
-            $this->attributes['href'] = $this->url;
+            $this->attributes['href'] = $this->getUrl();
         }
 
         return parent::toString();
