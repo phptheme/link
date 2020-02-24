@@ -6,6 +6,8 @@
  */
 namespace PhpTheme\Link;
 
+use PhpTheme\HtmlEscaper\HtmlEscaper;
+
 class Link extends \PhpTheme\Tag\Tag
 {
 
@@ -21,9 +23,18 @@ class Link extends \PhpTheme\Tag\Tag
 
     public $iconTemplate = '<i class="{icon}"></i>{label}';
 
+    public $escapeLabel = true;
+
     protected function getLabel()
     {
-        return $this->label;
+        $return = $this->label;
+
+        if ($this->escapeLabel)
+        {
+            $return = HtmlEscaper::encode($return);
+        }
+
+        return $return;
     }
 
     protected function getUrl()
